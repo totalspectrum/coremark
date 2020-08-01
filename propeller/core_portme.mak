@@ -21,7 +21,10 @@
 OUTFLAG= -o
 # Flag : CC
 #	Use this flag to define compiler to use
-CC = gcc
+#CC = riscv-none-embed-gcc -Triscvp2.ld -D__propeller2__
+CC = riscv-none-embed-gcc -Triscvp2_lut.ld -D__propeller2__
+#CC = fastspin -2
+
 # Flag : CFLAGS
 #	Use this flag to define compiler options. Note, you can add compiler options from the command line using XCFLAGS="other flags"
 PORT_CFLAGS = -O2
@@ -41,11 +44,11 @@ PORT_SRCS = $(PORT_DIR)/core_portme.c
 #	For a simple port, we assume self hosted compile and run, simple invocation of the executable
 
 #For native compilation and execution
-LOAD = echo Loading done
-RUN = 
+LOAD = loadp2 -f 180000000 -PATCH -b230400 -t
+RUN = echo Loading done
 
 OEXT = .o
-EXE = .exe
+EXE = .elf
 
 # Target : port_pre% and port_post%
 # For the purpose of this simple port, no pre or post steps needed.

@@ -62,6 +62,7 @@ Original Author: Shay Gal-on
 /* Configuration : CORE_TICKS
         Define type of return from the timing functions.
  */
+#include <stdint.h>
 #include <propeller.h>
 typedef unsigned long CORE_TICKS;
 
@@ -71,7 +72,11 @@ typedef unsigned long CORE_TICKS;
 #ifndef COMPILER_VERSION
 #ifdef __GNUC__
 #define COMPILER_VERSION "GCC"__VERSION__
-#else
+#endif
+#ifdef __FASTSPIN__
+#define COMPILER_VERSION "fastspin " __VERSION__
+#endif
+#ifndef COMPILER_VERSION
 #define COMPILER_VERSION "Please put compiler version here (e.g. gcc 4.1)"
 #endif
 #endif
