@@ -20,6 +20,11 @@ Original Author: Shay Gal-on
 #include <stdlib.h>
 #include "coremark.h"
 
+#ifdef P2GCC
+#define _cnt() _CNT
+#define _clockfreq() (*(unsigned *)0x14)
+#endif
+
 #if VALIDATION_RUN
 volatile ee_s32 seed1_volatile = 0x3415;
 volatile ee_s32 seed2_volatile = 0x3415;
